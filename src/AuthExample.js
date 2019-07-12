@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AuthButtonWithRouter from "./AuthButtonWithRouter";
 import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
 import Public from "./Public";
 import Protected from "./Protected";
 
@@ -59,26 +55,6 @@ class AuthExample extends Component {
       </Router>
     );
   }
-}
-
-function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: props.location }
-            }}
-          />
-        )
-      }
-    />
-  );
 }
 
 export default AuthExample;
